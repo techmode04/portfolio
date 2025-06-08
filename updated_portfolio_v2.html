@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sachin Dhisle | Video Editor Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #00ff88;
+      --primary-dark: #00cc66;
+      --secondary: #0a0a0a;
+      --accent: #1a1a1a;
+      --text: #ffffff;
+      --text-muted: #b0b0b0;
+      --gradient: linear-gradient(135deg, #00ff88, #00cc66, #009944);
+      --glass: rgba(255, 255, 255, 0.05);
+      --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      --glow: 0 0 20px rgba(0, 255, 136, 0.3);
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #000;
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Animated background */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 20% 80%, rgba(0, 255, 136, 0.1) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 20%, rgba(0, 255, 136, 0.1) 0%, transparent 50%);
+      z-index: -1;
+      animation: floating 20s infinite ease-in-out;
+    }
+
+    @keyframes floating {
+      0%, 100% { transform: scale(1) rotate(0deg); }
+      50% { transform: scale(1.1) rotate(180deg); }
+    }
+
+    /* Navigation Bar */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0, 255, 136, 0.2);
+      z-index: 1000;
+      padding: 1rem 0;
+      transition: all 0.3s ease;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 700;
+      font-size: 1.5rem;
+    }
+
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--gradient);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #000;
+      font-size: 1.2rem;
+    }
+
+    .logo-text {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav-link {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      position: relative;
+      padding: 0.5rem 0;
+    }
+
+    .nav-link:hover {
+      color: var(--primary);
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--gradient);
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 4px;
+    }
+
+    .nav-toggle span {
+      width: 25px;
+      height: 3px;
+      background: var(--primary);
+      transition: all 0.3s ease;
+      border-radius: 3px;
+    }
+
+    header {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(26, 26, 26, 0.8));
+      backdrop-filter: blur(10px);
+      padding-top: 80px; /* Add space for fixed navbar */
+    }
+
+    .hero-content {
+      max-width: 800px;
+      padding: 2rem;
+      z-index: 2;
+    }
+
+    .profile-photo {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      margin: 0 auto 2rem;
+      position: relative;
+      background: var(--gradient);
+      padding: 4px;
+      box-shadow: var(--glow);
+      animation: pulse 3s infinite;
+    }
+
+    .profile-photo img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #000;
+    }
+
+    .profile-photo::before {
+      content: '';
+      position: absolute;
+      inset: -10px;
+      border-radius: 50%;
+      background: var(--gradient);
+      z-index: -1;
+      filter: blur(20px);
+      opacity: 0.7;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    .hero-title {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 800;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      color: var(--text-muted);
+      font-weight: 400;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-description {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      margin-bottom: 3rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 1rem 2rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary {
+      background: var(--gradient);
+      color: #000;
+      box-shadow: var(--glow);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 40px rgba(0, 255, 136, 0.4);
+    }
+
+    .btn-secondary {
+      background: var(--glass);
+      color: var(--text);
+      border: 1px solid rgba(0, 255, 136, 0.3);
+      backdrop-filter: blur(10px);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(0, 255, 136, 0.1);
+      border-color: var(--primary);
+      transform: translateY(-2px);
+    }
+
+    .btn-whatsapp {
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      color: white;
+      box-shadow: 0 8px 32px rgba(37, 211, 102, 0.3);
+    }
+
+    .btn-whatsapp:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 40px rgba(37, 211, 102, 0.4);
+    }
+
+    .section {
+      padding: 6rem 2rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 4px;
+      background: var(--gradient);
+      border-radius: 2px;
+    }
+
+    .glass-card {
+      background: var(--glass);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: var(--shadow);
+      transition: all 0.3s ease;
+    }
+
+    .glass-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(0, 255, 136, 0.3);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    }
+
+    .video-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .video-card {
+      background: var(--glass);
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .video-card:hover {
+      transform: translateY(-10px);
+      border-color: rgba(0, 255, 136, 0.5);
+      box-shadow: var(--glow);
+    }
+
+    .video-card iframe {
+      width: 100%;
+      height: 250px;
+      border: none;
+    }
+
+    .video-category {
+      color: var(--primary);
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin: 3rem 0 2rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .service-card {
+      background: var(--glass);
+      border-radius: 20px;
+      padding: 2rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(0, 255, 136, 0.3);
+      box-shadow: var(--glow);
+    }
+
+    .service-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .tools-grid {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      margin-top: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .tool-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+      background: var(--glass);
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+      min-width: 150px;
+    }
+
+    .tool-item:hover {
+      transform: translateY(-10px);
+      border-color: var(--primary);
+      box-shadow: var(--glow);
+    }
+
+    .tool-item img {
+      height: 60px;
+      margin-bottom: 1rem;
+      filter: brightness(1.2);
+    }
+
+    .contact-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .contact-card {
+      background: var(--glass);
+      border-radius: 20px;
+      padding: 2rem;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .contact-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--primary);
+      box-shadow: var(--glow);
+      color: var(--text);
+    }
+
+    .contact-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+
+    .whatsapp-card:hover .contact-icon {
+      color: #25D366;
+    }
+
+    footer {
+      text-align: center;
+      padding: 3rem 2rem;
+      background: var(--accent);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    footer a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Mobile Navigation */
+    @media (max-width: 768px) {
+      .nav-menu {
+        position: fixed;
+        top: 70px;
+        right: -100%;
+        width: 100%;
+        height: calc(100vh - 70px);
+        background: rgba(0, 0, 0, 0.98);
+        backdrop-filter: blur(10px);
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 2rem;
+        padding-top: 3rem;
+        transition: right 0.3s ease;
+      }
+
+      .nav-menu.active {
+        right: 0;
+      }
+
+      .nav-toggle {
+        display: flex;
+      }
+
+      .nav-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+
+      .nav-toggle.active span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .nav-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+      }
+    }
+
+    /* Scrollbar styling */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--secondary);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--primary);
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--primary-dark);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .profile-photo {
+        width: 150px;
+        height: 150px;
+      }
+      
+      .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .btn {
+        width: 100%;
+        max-width: 280px;
+        justify-content: center;
+      }
+      
+      .section {
+        padding: 4rem 1rem;
+      }
+      
+      .video-gallery {
+        grid-template-columns: 1fr;
+      }
+      
+      .tools-grid {
+        gap: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <div class="logo-icon">
+          <i class="fas fa-code"></i>
+        </div>
+        <span class="logo-text">TechMode</span>
+      </div>
+      <div class="nav-menu">
+        <a href="#home" class="nav-link">Home</a>
+        <a href="#about" class="nav-link">About Us</a>
+        <a href="#work" class="nav-link">Work</a>
+        <a href="#services" class="nav-link">Services</a>
+        <a href="#contact" class="nav-link">Contact Us</a>
+      </div>
+      <div class="nav-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <header id="home">
+    <div class="hero-content">
+      <div class="profile-photo">
+        <!-- Replace this with your actual photo -->
+        <img src="profile-pic.png"Sachin Dhisle">
+      </div>
+      <h1 class="hero-title">Sachin Dhisle</h1>
+      <h2 class="hero-subtitle">Video Editor & Cinematic Storyteller</h2>
+      <p class="hero-description">
+        Bringing stories to life through the art of visual storytelling. Specializing in cinematic editing, 
+        color grading, and short-form content that captivates audiences.
+      </p>
+      <div class="cta-buttons">
+        <a href="#work" class="btn btn-primary">
+          <i class="fas fa-play"></i>
+          View My Work
+        </a>
+        <a href="https://wa.me/your-phone-number" class="btn btn-whatsapp" target="_blank">
+          <i class="fab fa-whatsapp"></i>
+          WhatsApp Me
+        </a>
+        <a href="#contact" class="btn btn-secondary">
+          <i class="fas fa-envelope"></i>
+          Get In Touch
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <section class="section" id="about">
+    <div class="glass-card">
+      <h2 class="section-title">About Me</h2>
+      <p style="text-align: center; font-size: 1.1rem; color: var(--text-muted);">
+        I'm Sachin, a passionate freelance video editor based in India. I specialize in cinematic storytelling, 
+        short-form content, and creative color grading using DaVinci Resolve. My goal is to turn raw footage 
+        into visual stories that leave a lasting impression. Whether it's for a brand, vlog, or business — 
+        I craft edits that connect.
+      </p>
+    </div>
+  </section>
+
+  <section class="section" id="work">
+    <h2 class="section-title">My Work</h2>
+
+    <h3 class="video-category">Short Videos</h3>
+    <div class="video-gallery">
+      <div class="video-card">
+        <iframe src="https://www.youtube.com/embed/video1" title="Short Video 1"></iframe>
+      </div>
+      <div class="video-card">
+        <iframe src="https://www.youtube.com/embed/video2" title="Short Video 2"></iframe>
+      </div>
+      <div class="video-card">
+        <iframe src="https://www.youtube.com/embed/video3" title="Short Video 3"></iframe>
+      </div>
+      <div class="video-card">
+        <iframe src="https://www.youtube.com/embed/video4" title="Short Video 4"></iframe>
+      </div>
+      <div class="video-card">
+        <iframe src="https://www.youtube.com/embed/video5" title="Short Video 5"></iframe>
+      </div>
+      <div class="video-card">
+        <iframe src="https://www.youtube.com/embed/video6" title="Short Video 6"></iframe>
+      </div>
+      <div class="video-card">
+        <iframe src="https://www.youtube.com/embed/video7" title="Short Video 7"></iframe>
+      </div>
+      <div class="video-card">
+        <iframe src="https://www.youtube.com/embed/video8" title="Short Video 8"></iframe>
+      </div>
+      <div class="video-card">
+        <iframe src="https://www.youtube.com/embed/video9" title="Short Video 9"></iframe>
+      </div>
+      <div class="video-card">
+        <iframe src="https://www.youtube.com/embed/video10" title="Short Video 10"></iframe>
+      </div>
+    </div>
+
+    <h3 class="video-category">Long Videos</h3>
+    <div class="video-gallery">
+      <div class="video-card">
+        <iframe src="https://www.youtube.com/embed/long1" title="Long Video 1"></iframe>
+      </div>
+      <div class="video-card">
+        <iframe src="https://www.youtube.com/embed/long2" title="Long Video 2"></iframe>
+      </div>
+      <div class="video-card">
+        <iframe src="https://www.youtube.com/embed/long3" title="Long Video 3"></iframe>
+      </div>
+      <div class="video-card">
+        <iframe src="https://www.youtube.com/embed/long4" title="Long Video 4"></iframe>
+      </div>
+      <div class="video-card">
+        <iframe src="https://www.youtube.com/embed/long5" title="Long Video 5"></iframe>
+      </div>
+      <div class="video-card">
+        <iframe src="https://www.youtube.com/embed/long6" title="Long Video 6"></iframe>
+      </div>
+      <div class="video-card">
+        <iframe src="https://www.youtube.com/embed/long7" title="Long Video 7"></iframe>
+      </div>
+      <div class="video-card">
+        <iframe src="https://www.youtube.com/embed/long8" title="Long Video 8"></iframe>
+      </div>
+      <div class="video-card">
+        <iframe src="https://www.youtube.com/embed/long9" title="Long Video 9"></iframe>
+      </div>
+      <div class="video-card">
+        <iframe src="https://www.youtube.com/embed/long10" title="Long Video 10"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="services">
+    <h2 class="section-title">Services</h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">🎬</div>
+        <h3>Short-Form Editing</h3>
+        <p>Reels, Shorts, Promos that capture attention and drive engagement</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🎨</div>
+        <h3>Advanced Color Grading</h3>
+        <p>Professional color correction and grading using DaVinci Resolve</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">📺</div>
+        <h3>YouTube Video Editing</h3>
+        <p>Complete YouTube video editing with motion effects and graphics</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🎥</div>
+        <h3>Cinematic Editing</h3>
+        <p>Travel, lifestyle, and brand videos with cinematic storytelling</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="tools">
+    <h2 class="section-title">Tools I Use</h2>
+    <div class="tools-grid">
+      <div class="tool-item">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/DaVinci_Resolve_17_logo.svg" alt="DaVinci Resolve" />
+        <span>DaVinci Resolve</span>
+      </div>
+      <div class="tool-item">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Adobe_Premiere_Pro_Logo.svg" alt="Premiere Pro" />
+        <span>Premiere Pro</span>
+      </div>
+      <div class="tool-item">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/CapCut_Logo.png" alt="CapCut" />
+        <span>CapCut</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contact">
+    <h2 class="section-title">Let's Work Together</h2>
+    <p style="text-align: center; font-size: 1.1rem; color: var(--text-muted); margin-bottom: 2rem;">
+      Ready to bring your vision to life? Get in touch through any of these platforms:
+    </p>
+    <div class="contact-cards">
+      <a href="https://wa.me/your-phone-number" class="contact-card whatsapp-card" target="_blank">
+        <div class="contact-icon">
+          <i class="fab fa-whatsapp"></i>
+        </div>
+        <h3>WhatsApp</h3>
+        <p>Quick chat and project discussion</p>
+      </a>
+      <a href="mailto:maindr408@gmail.com" class="contact-card">
+        <div class="contact-icon">
+          <i class="fas fa-envelope"></i>
+        </div>
+        <h3>Email</h3>
+        <p>maindr408@gmail.com</p>
+      </a>
+      <a href="https://instagram.com/sachindisle" class="contact-card" target="_blank">
+        <div class="contact-icon">
+          <i class="fab fa-instagram"></i>
+        </div>
+        <h3>Instagram</h3>
+        <p>@sachindisle</p>
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 <strong>Sachin Dhisle</strong> · Video Editor Portfolio · Built with 💚</p>
+    <p><a href="#contact">Let's Connect</a> | <a href="https://wa.me/your-phone-number" target="_blank">WhatsApp</a></p>
+  </footer>
+
+  <script>
+    // Mobile navigation toggle
+    const navToggle = document.querySelector('.nav-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+
+    navToggle.addEventListener('click', function() {
+      navToggle.classList.toggle('active');
+      navMenu.classList.toggle('active');
+    });
+
+    // Close mobile menu when clicking on a link
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', function() {
+        navToggle.classList.remove('active');
+        navMenu.classList.remove('active');
+      });
+    });
+
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Add floating animation to video cards
+    const videoCards = document.querySelectorAll('.video-card');
+    videoCards.forEach((card, index) => {
+      card.style.animationDelay = `${index * 0.1}s`;
+    });
+  </script>
+</body>
+</html>
