@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Collection</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            font-family: 'Arial', sans-serif;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: rgba(0 0 0 / 10%);
+            border-radius: 15px;
+            border: 2px solid ##ffffff;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+        }
+
+        .header h1 {
+            color: #ffffff;
+            font-size: 2.5rem;
+            text-shadow: 0 0 10px rgba(0 0 0 / 80%);
+            margin-bottom: 10px;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 25px;
+            padding: 20px 0;
+        }
+
+        .video-container {
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 15px;
+            padding: 15px;
+            border: 2px solid #00ff00;
+            box-shadow: 0 5px 25px rgba(0, 255, 0, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .video-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .video-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 35px rgba(0, 255, 0, 0.4);
+            border-color: #39ff14;
+        }
+
+        .video-container:hover::before {
+            left: 100%;
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 10px;
+            background: #000;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 10px;
+        }
+
+        .video-number {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: linear-gradient(45deg, #00ff00, #39ff14);
+            color: #000;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+            z-index: 10;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.8);
+        }
+
+        /* Add pulsing animation to video containers */
+        @keyframes pulse {
+            0%, 100% { border-color: #00ff00; }
+            50% { border-color: #39ff14; }
+        }
+
+        .video-container {
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .video-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+        }
+
+        /* Loading animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(0, 255, 0, 0.3);
+            border-radius: 50%;
+            border-top-color: #00ff00;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Glowing effect for the whole page */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(0, 255, 0, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: -1;
+        }
+            
+           
+        /* Button Styles */
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+            padding: 20px;
+        }
+
+        .long-videos-btn {
+            position: relative;
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(45deg, #000000, #1a1a1a);
+            color: #00ff00;
+            text-decoration: none;
+            border: 2px solid #00ff00;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+        }
+
+        .long-videos-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 30px rgba(0, 255, 0, 0.5);
+            color: #000;
+            background: linear-gradient(45deg, #00ff00, #39ff14);
+            border-color: #39ff14;
+        }
+
+        .btn-glow {
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .long-videos-btn:hover .btn-glow {
+            left: 100%;
+        }
+
+        .btn-text {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Pulsing animation for button */
+        @keyframes buttonPulse {
+            0%, 100% { 
+                box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+            }
+            50% { 
+                box-shadow: 0 0 30px rgba(0, 255, 0, 0.6);
+            }
+        }
+
+        .long-videos-btn {
+            animation: buttonPulse 2s ease-in-out infinite;
+        }
+
+        /* Responsive button */
+        @media (max-width: 768px) {
+            .long-videos-btn {
+                padding: 12px 30px;
+                font-size: 1rem;
+                letter-spacing: 1px;
+            }
+        }
+  
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎬 Shot Video Collection</h1>
+        </div>
+        
+        <div class="video-grid">
+            <!-- Video 1 -->
+            <div class="video-container">
+                <div class="video-number">1</div>
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- Video 2 -->
+            <div class="video-container">
+                <div class="video-number">2</div>
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- Video 3 -->
+            <div class="video-container">
+                <div class="video-number">3</div>
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- Video 4 -->
+            <div class="video-container">
+                <div class="video-number">4</div>
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- Video 5 -->
+            <div class="video-container">
+                <div class="video-number">5</div>
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- Video 6 -->
+            <div class="video-container">
+                <div class="video-number">6</div>
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- Video 7 -->
+            <div class="video-container">
+                <div class="video-number">7</div>
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- Video 8 -->
+            <div class="video-container">
+                <div class="video-number">8</div>
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- Video 9 -->
+            <div class="video-container">
+                <div class="video-number">9</div>
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- Video 10 -->
+            <div class="video-container">
+                <div class="video-number">10</div>
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+             <!-- Go to Long Videos Button -->
+        <div class="button-container">
+            <a href="#" class="long-videos-btn" id="longVideosBtn">
+                <span class="btn-text">Go to Long Videos</span>
+                <span class="btn-glow"></span>
+            </a>
+        </div>
+    </div>
+
+
+    <script>
+        // Add some interactive effects
+        document.addEventListener('DOMContentLoaded', function() {
+            const videoContainers = document.querySelectorAll('.video-container');
+            
+            videoContainers.forEach((container, index) => {
+                // Add staggered animation on load
+                container.style.animationDelay = `${index * 0.1}s`;
+                
+                // Add click effect
+                container.addEventListener('click', function() {
+                    this.style.transform = 'scale(0.98)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 150);
+                });
+            });
+
+            // Add floating particles effect
+            function createParticle() {
+                const particle = document.createElement('div');
+                particle.style.cssText = `
+                    position: fixed;
+                    width: 4px;
+                    height: 4px;
+                    background: #00ff00;
+                    border-radius: 50%;
+                    pointer-events: none;
+                    z-index: 1;
+                    opacity: 0.7;
+                    left: ${Math.random() * 100}vw;
+                    top: 100vh;
+                    animation: float 10s linear infinite;
+                `;
+                
+                document.body.appendChild(particle);
+                
+                setTimeout(() => {
+                    particle.remove();
+                }, 10000);
+            }
+
+            // Add CSS for floating animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes float {
+                    to {
+                        transform: translateY(-100vh) rotate(360deg);
+                        opacity: 0;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+
+            // Create particles periodically
+            setInterval(createParticle, 2000);
+        });
+    </script>
+</body>
+</html>
