@@ -252,10 +252,12 @@
       gap: 0.5rem;
       position: relative;
       overflow: hidden;
+      border: none;
+      cursor: pointer;
     }
 
     .btn-primary {
-      
+      background: var(--gradient);
       color: #ffffff;
       box-shadow: var(--glow);
     }
@@ -266,7 +268,7 @@
     }
 
     .btn-secondary {
-    
+      background: var(--gradient);
       color: var(--text);
       box-shadow: var(--glow);
     }
@@ -274,7 +276,6 @@
     .btn-secondary:hover {
       transform: translateY(-2px);
       box-shadow: 0 10px 40px rgba(0, 255, 136, 0.4);
-
     }
 
     .btn-whatsapp {
@@ -286,6 +287,27 @@
     .btn-whatsapp:hover {
       transform: translateY(-2px);
       box-shadow: 0 10px 40px rgba(37, 211, 102, 0.4);
+    }
+
+    /* Show More Button Styles */
+    .show-more-btn {
+      background: var(--gradient);
+      color: #000;
+      font-weight: 600;
+      padding: 0.8rem 2rem;
+      border-radius: 30px;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      box-shadow: var(--glow);
+      margin: 2rem auto;
+      display: block;
+    }
+
+    .show-more-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(0, 255, 136, 0.4);
     }
 
     .section {
@@ -600,7 +622,7 @@
     <div class="hero-content">
       <div class="profile-photo">
         <!-- Replace this with your actual photo -->
-        <img src="profile-pic.png"Sachin Dhisle">
+        <img src="profile-pic.png" alt="Sachin Dhisle">
       </div>
       <h1 class="hero-title">Sachin Dhisle</h1>
       <h2 class="hero-subtitle">Video Editor & Cinematic Storyteller</h2>
@@ -660,10 +682,12 @@
       <div class="video-card">
         <iframe src="https://www.youtube.com/embed/video6" title="Short Video 6"></iframe>
       </div>
-    
- 
-  
     </div>
+
+    <!-- Show More Short Videos Button -->
+    <button class="show-more-btn" onclick="showMoreShortVideos()">
+      <i class="fas fa-plus"></i> Show More Short Videos
+    </button>
 
     <h3 class="video-category">Long Videos</h3>
     <div class="video-gallery">
@@ -685,9 +709,12 @@
       <div class="video-card">
         <iframe src="https://www.youtube.com/embed/long6" title="Long Video 6"></iframe>
       </div>
-     
-    
     </div>
+
+    <!-- Show More Long Videos Button -->
+    <button class="show-more-btn" onclick="showMoreLongVideos()">
+      <i class="fas fa-plus"></i> Show More Long Videos
+    </button>
   </section>
 
   <section class="section" id="services">
@@ -724,11 +751,11 @@
         <span>DaVinci Resolve</span>
       </div>
       <div class="tool-item">
-        <img src="primer_pro.png" />
+        <img src="primer_pro.png" alt="Premiere Pro" />
         <span>Premiere Pro</span>
       </div>
       <div class="tool-item">
-        <img src="af.png" />
+        <img src="af.png" alt="After Effects" />
         <span>After Effect</span>
       </div>
     </div>
@@ -806,6 +833,20 @@
     videoCards.forEach((card, index) => {
       card.style.animationDelay = `${index * 0.1}s`;
     });
+
+    // Show More Short Videos function
+    function showMoreShortVideos() {
+      alert('यहाँ आप और भी Short Videos देख सकेंगे। यह feature जल्दी ही आने वाला है!');
+      // You can add your logic here to show more short videos
+      // For example, redirect to a new page or load more videos dynamically
+    }
+
+    // Show More Long Videos function
+    function showMoreLongVideos() {
+      alert('यहाँ आप और भी Long Videos देख सकेंगे। यह feature जल्दी ही आने वाला है!');
+      // You can add your logic here to show more long videos
+      // For example, redirect to a new page or load more videos dynamically
+    }
   </script>
 </body>
 </html>
