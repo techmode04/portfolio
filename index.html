@@ -301,8 +301,11 @@
       font-size: 1rem;
       transition: all 0.3s ease;
       box-shadow: var(--glow);
-      margin: 2rem auto;
+      margin: 3rem auto;
       display: block;
+      text-decoration: none;
+      text-align: center;
+       width: fit-content;
     }
 
     .show-more-btn:hover {
@@ -685,9 +688,9 @@
     </div>
 
     <!-- Show More Short Videos Button -->
-    <button class="show-more-btn" onclick="showMoreShortVideos()">
+    <a href="shortvideo.html" class="show-more-btn">
       <i class="fas fa-plus"></i> Show More Short Videos
-    </button>
+    </a>
 
     <h3 class="video-category">Long Videos</h3>
     <div class="video-gallery">
@@ -712,9 +715,9 @@
     </div>
 
     <!-- Show More Long Videos Button -->
-    <button class="show-more-btn" onclick="showMoreLongVideos()">
+    <a href="longvideo.html" class="show-more-btn">
       <i class="fas fa-plus"></i> Show More Long Videos
-    </button>
+    </a>
   </section>
 
   <section class="section" id="services">
@@ -833,20 +836,6 @@
     videoCards.forEach((card, index) => {
       card.style.animationDelay = `${index * 0.1}s`;
     });
-
-    // Show More Short Videos function
-    function showMoreShortVideos() {
-      alert('यहाँ आप और भी Short Videos देख सकेंगे। यह feature जल्दी ही आने वाला है!');
-      // You can add your logic here to show more short videos
-      // For example, redirect to a new page or load more videos dynamically
-    }
-
-    // Show More Long Videos function
-    function showMoreLongVideos() {
-      alert('यहाँ आप और भी Long Videos देख सकेंगे। यह feature जल्दी ही आने वाला है!');
-      // You can add your logic here to show more long videos
-      // For example, redirect to a new page or load more videos dynamically
-    }
   </script>
 </body>
 </html>
