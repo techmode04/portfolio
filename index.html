@@ -354,9 +354,7 @@
     }
 
     .video-gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-      gap: 2rem;
+      /* Removed grid properties, will be set by specific classes */
       margin-top: 3rem;
     }
 
@@ -375,11 +373,72 @@
       box-shadow: var(--glow);
     }
 
+    /* Hide the old iframe styles */
     .video-card iframe {
-      width: 100%;
-      height: 250px;
-      border: none;
+      display: none;
     }
+
+    /* NEW STYLES FOR HTML5 VIDEO */
+    .video-card video {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: contain; /* Use 'contain' to see the whole video */
+        background-color: #000; /* Letterboxing color */
+    }
+
+    /* NEW: 16:9 Aspect Ratio for Long Videos */
+    .video-card-long {
+        position: relative;
+        padding-top: 56.25%; /* 16:9 */
+        height: 0;
+        overflow: hidden; 
+        background: #000; 
+    }
+
+    .video-card-long video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    /* NEW: 9:16 Aspect Ratio for Reels/Short Videos */
+    .video-card-reel {
+        position: relative;
+        padding-top: 177.78%; /* 9:16 */
+        height: 0;
+        overflow: hidden;
+        background: #000;
+    }
+
+    .video-card-reel video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    /* NEW: Grid for Short Videos (Reels) */
+    .video-gallery.reels-grid {
+         display: grid;
+         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+         gap: 1.5rem;
+         max-width: 1000px; /* Constrain width for better layout */
+         margin-left: auto;
+         margin-right: auto;
+    }
+    
+    /* NEW: Grid for Long Videos (16:9) */
+    .video-gallery.long-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 2rem;
+    }
+    /* END OF NEW VIDEO STYLES */
+
 
     .video-category {
       color: var(--primary);
@@ -584,9 +643,15 @@
         padding: 4rem 1rem;
       }
       
-      .video-gallery {
-        grid-template-columns: 1fr;
+      /* NEW: Responsive grids */
+      .video-gallery.reels-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 1rem;
       }
+      .video-gallery.long-grid {
+            grid-template-columns: 1fr;
+      }
+      /* END NEW */
       
       .tools-grid {
         gap: 1.5rem;
@@ -664,24 +729,62 @@
     <h2 class="section-title">My Work</h2>
 
     <h3 class="video-category">Short Videos</h3>
-    <div class="video-gallery">
-      <div class="video-card">
-      <iframe src="https://www.youtube.com/embed/JZlbihy74jc" title="Short Video 1"></iframe>    
+    <!-- UPDATED: Added 'reels-grid' class for 9:16 layout -->
+    <div class="video-gallery reels-grid">
+      
+      <!-- Short Video 1: Replaced iframe with <video> tag -->
+      <div class="video-card video-card-reel">
+        <!-- 
+          REPLACE 'reels/video1.mp4' with your 9:16 video file path.
+          REPLACE 'https://placehold.co/...' with your poster image path.
+        -->
+        <video controls poster="https://placehold.co/270x480/000000/00ff88?text=Reel+1">
+          <source src="reels/video1.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
       </div>
-      <div class="video-card">
-        <iframe src="https://www.youtube.com/embed/aRPKT7bWIhE" title="Short Video 2"></iframe>
+
+      <!-- Short Video 2: Replaced iframe with <video> tag -->
+      <div class="video-card video-card-reel">
+        <!-- 
+          REPLACE 'reels/video2.mp4' with your 9:16 video file path.
+        -->
+        <video controls poster="https://placehold.co/270x480/000000/00ff88?text=Reel+2">
+          <source src="reels/video2.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
       </div>
-      <div class="video-card">
-        <iframe src="https://www.youtube.com/embed/wv-PgNhMYJc" title="Short Video 3"></iframe>
+      
+      <!-- Short Video 3: Replaced iframe with <video> tag -->
+      <div class="video-card video-card-reel">
+        <video controls poster="https://placehold.co/270x480/000000/00ff88?text=Reel+3">
+          <source src="reels/video3.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
       </div>
-      <div class="video-card">
-        <iframe src="https://www.youtube.com/embed/QzsmYdJWHRI" title="Short Video 4"></iframe>
+
+      <!-- Short Video 4: Replaced iframe with <video> tag -->
+      <div class="video-card video-card-reel">
+        <video controls poster="https://placehold.co/270x480/000000/00ff88?text=Reel+4">
+          <source src="reels/video4.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
       </div>
-      <div class="video-card">
-        <iframe src="https://www.youtube.com/embed/j3pz4juuPL0" title="Short Video 5"></iframe>
+
+      <!-- Short Video 5: Replaced iframe with <video> tag -->
+      <div class="video-card video-card-reel">
+        <video controls poster="https://placehold.co/270x480/000000/00ff88?text=Reel+5">
+          <source src="reels/video5.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
       </div>
-      <div class="video-card">
-        <iframe src="https://www.youtube.com/embed/video6" title="Short Video 6"></iframe>
+
+      <!-- Short Video 6: Replaced iframe with <video> tag -->
+      <div class="video-card video-card-reel">
+        <video controls poster="https://placehold.co/270x480/000000/00ff88?text=Reel+6">
+          <source src="reels/video6.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
       </div>
     </div>
 
@@ -691,24 +794,59 @@
     </a>
 
     <h3 class="video-category">Long Videos</h3>
-    <div class="video-gallery">
-      <div class="video-card">
-        <iframe src="https://www.youtube.com/embed/oi9-X9LRQoM" title="Long Video 1"></iframe>
+    <!-- UPDATED: Added 'long-grid' class for 16:9 layout -->
+    <div class="video-gallery long-grid">
+      
+      <!-- Long Video 1: Replaced iframe with <video> tag -->
+      <div class="video-card video-card-long">
+        <!-- 
+          REPLACE 'long/video1.mp4' with your 16:9 video file path.
+          REPLACE 'https://placehold.co/...' with your poster image path.
+        -->
+        <video controls poster="https://placehold.co/640x360/000000/00ff88?text=Video+1">
+          <source src="long/video1.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
       </div>
-      <div class="video-card">
-        <iframe src="https://www.youtube.com/embed/7lXiqv63vYA" title="Long Video 2"></iframe>
+
+      <!-- Long Video 2: Replaced iframe with <video> tag -->
+      <div class="video-card video-card-long">
+        <video controls poster="https://placehold.co/640x360/000000/00ff88?text=Video+2">
+          <source src="long/video2.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
       </div>
-      <div class="video-card">
-        <iframe src="https://www.youtube.com/embed/DwOfzf9AlNQ" title="Long Video 3"></iframe>
+
+      <!-- Long Video 3: Replaced iframe with <video> tag -->
+      <div class="video-card video-card-long">
+        <video controls poster="https://placehold.co/640x360/000000/00ff88?text=Video+3">
+          <source src="long/video3.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
       </div>
-      <div class="video-card">
-        <iframe src="https://www.youtube.com/embed/long4" title="Long Video 4"></iframe>
+
+      <!-- Long Video 4: Replaced iframe with <video> tag -->
+      <div class="video-card video-card-long">
+        <video controls poster="https://placehold.co/640x360/000000/00ff88?text=Video+4">
+          <source src="long/video4.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
       </div>
-      <div class="video-card">
-        <iframe src="https://www.youtube.com/embed/long5" title="Long Video 5"></iframe>
+
+      <!-- Long Video 5: Replaced iframe with <video> tag -->
+      <div class="video-card video-card-long">
+        <video controls poster="https://placehold.co/640x360/000000/00ff88?text=Video+5">
+          <source src="long/video5.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
       </div>
-      <div class="video-card">
-        <iframe src="https://www.youtube.com/embed/long6" title="Long Video 6"></iframe>
+
+      <!-- Long Video 6: Replaced iframe with <video> tag -->
+      <div class="video-card video-card-long">
+        <video controls poster="https://placehold.co/640x360/000000/00ff88?text=Video+6">
+          <source src="long/video6.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
       </div>
     </div>
 
@@ -787,7 +925,7 @@
           <i class="fab fa-instagram"></i>
         </div>
         <h3>Instagram</h3>
-        <p>@sachindisle</p>
+        <p>@sachindhisle</p>
       </a>
     </div>
   </section>
