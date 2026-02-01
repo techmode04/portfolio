@@ -99,6 +99,7 @@
             position: relative;
             background: #111;
             border: 1px solid rgba(255,255,255,0.05);
+            overflow: hidden;
         }
         
         .hover-card:hover {
@@ -121,9 +122,21 @@
         #modalContainer {
             position: relative;
             width: 100%;
-            border-radius: 30px;
+            border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 0 100px rgba(59, 130, 246, 0.2);
+        }
+
+        /* Mobile Close Button Styling */
+        @media (max-width: 640px) {
+            #modalContainer { border-radius: 12px; }
+            .modal-close-btn { 
+                top: -35px !important; 
+                right: 0 !important;
+                font-size: 9px !important;
+                padding: 6px 12px !important;
+                background: rgba(255,255,255,0.1);
+            }
         }
 
         .reveal { opacity: 0; transform: translateY(30px); transition: 1s cubic-bezier(0.23, 1, 0.32, 1); }
@@ -159,7 +172,6 @@
         }
         .hover-card:hover .play-overlay { opacity: 1; }
 
-        /* Mobile Menu Overlay */
         #mobile-menu {
             display: none;
             position: fixed;
@@ -188,33 +200,35 @@
     <!-- Video Modal -->
     <div id="videoModal" onclick="closeVideo()">
         <div id="modalContainer" class="max-w-5xl shadow-2xl transition-all duration-500">
-            <button class="absolute top-4 right-4 text-white/50 text-xl hover:text-white transition z-10 font-bold uppercase tracking-widest text-[10px] glass px-4 py-2 rounded-full">Close &times;</button>
+            <!-- Modal Close Button -->
+            <button class="modal-close-btn absolute top-6 right-6 text-white/70 hover:text-white transition z-[10003] font-bold uppercase tracking-widest text-[10px] md:text-xs glass px-4 py-2 rounded-full">
+                Close &times;
+            </button>
             <iframe id="youtubePlayer" class="w-full h-full aspect-video" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
     </div>
 
-    <!-- WhatsApp Float -->
+    <!-- WhatsApp Chat -->
     <a href="https://wa.me/919359876866" target="_blank" class="whatsapp-float">
         <i class="fa-brands fa-whatsapp"></i>
     </a>
 
-    <!-- Mobile Menu -->
+    <!-- Mobile Menu Navigation -->
     <div id="mobile-menu">
         <button onclick="toggleMenu()" class="absolute top-8 right-8 text-3xl text-white">&times;</button>
-        <a href="javascript:void(0)" onclick="showPage('home')" class="text-3xl font-sync font-bold hover:text-blue-500 transition">Home</a>
-        <a href="javascript:void(0)" onclick="showPage('reels')" class="text-3xl font-sync font-bold hover:text-blue-500 transition">Shorts</a>
-        <a href="#about" onclick="showPage('home')" class="text-3xl font-sync font-bold hover:text-blue-500 transition">About</a>
-        <a href="#work" onclick="showPage('home')" class="text-3xl font-sync font-bold hover:text-blue-500 transition">Work</a>
+        <a href="javascript:void(0)" onclick="showPage('home')" class="text-3xl font-sync font-bold hover:text-blue-500 transition uppercase">Home</a>
+        <a href="javascript:void(0)" onclick="showPage('reels')" class="text-3xl font-sync font-bold hover:text-blue-500 transition uppercase">Shorts</a>
+        <a href="#about" onclick="showPage('home')" class="text-3xl font-sync font-bold hover:text-blue-500 transition uppercase">About</a>
+        <a href="#work" onclick="showPage('home')" class="text-3xl font-sync font-bold hover:text-blue-500 transition uppercase">Work</a>
         <a href="https://wa.me/919359876866" target="_blank" class="bg-blue-600 text-white px-8 py-3 rounded-full text-lg font-bold uppercase tracking-widest">Hire Me</a>
     </div>
 
-    <!-- Navigation -->
+    <!-- Navbar -->
     <nav class="fixed top-4 md:top-6 left-1/2 -translate-x-1/2 w-[92%] md:w-[70%] z-[100] glass py-3 md:py-4 px-6 md:px-8 rounded-full flex justify-between items-center">
         <div class="text-lg md:text-xl font-sync font-bold tracking-tighter cursor-pointer group" onclick="showPage('home')">
             TECH<span class="text-blue-500 group-hover:text-white transition">MODE</span>
         </div>
         
-        <!-- Desktop Links -->
         <div class="hidden md:flex gap-8 text-[10px] uppercase tracking-[0.3em] font-bold text-gray-400">
             <a href="javascript:void(0)" onclick="showPage('home')" class="hover:text-white transition">Home</a>
             <a href="javascript:void(0)" onclick="showPage('reels')" class="hover:text-white transition">Shorts</a>
@@ -226,7 +240,6 @@
             <a href="https://wa.me/919359876866" target="_blank" class="hidden sm:block bg-white text-black px-5 py-2 rounded-full text-[10px] font-extrabold uppercase tracking-widest hover:bg-blue-600 hover:text-white transition-all">
                 Contact
             </a>
-            <!-- Mobile Menu Toggle Button -->
             <button onclick="toggleMenu()" class="md:hidden text-white text-xl p-2">
                 <i class="fa-solid fa-bars-staggered"></i>
             </button>
@@ -236,22 +249,23 @@
     <!-- PAGE: HOME -->
     <main id="home-page" class="page active">
         <!-- Hero Section -->
-        <section class="min-h-screen flex flex-col justify-center items-center px-6 pt-24 md:pt-32 relative overflow-hidden">
+        <section class="min-h-screen flex flex-col justify-center items-center px-6 pt-24 md:pt-32 relative overflow-hidden text-center">
             <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-600/10 blur-[150px] -z-10"></div>
             <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-600/10 blur-[150px] -z-10"></div>
             
-            <div class="text-center z-10">
+            <div class="z-10">
                 <div class="inline-flex items-center gap-2 glass px-4 py-1.5 rounded-full text-[10px] uppercase tracking-[0.3em] text-blue-400 mb-6 md:mb-10 reveal">
                     <span class="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span> Available for Projects
                 </div>
-                <h1 class="text-4xl md:text-7xl lg:text-8xl font-sync font-bold mb-4 tracking-tighter leading-none reveal">
+                <h1 class="text-4xl md:text-7xl lg:text-8xl font-sync font-bold mb-4 tracking-tighter leading-none reveal uppercase">
                     SACHIN <br> <span class="gradient-text">DHISLE</span>
                 </h1>
                 <p class="text-gray-400 max-w-xl mx-auto text-sm md:text-lg mb-10 md:mb-14 reveal font-light leading-relaxed">
                     Visual storyteller specialized in premium post-production. Transforming raw clips into cinematic experiences.
                 </p>
                 <div class="flex flex-wrap gap-4 md:gap-6 justify-center reveal">
-                    <button data-video-id="dQw4w9WgXcQ" data-type="long" class="yt-trigger bg-white text-black px-8 md:px-12 py-4 md:py-5 rounded-2xl font-bold text-xs md:text-sm uppercase tracking-widest hover:bg-blue-600 hover:text-white transition-all flex items-center gap-3 md:gap-4">
+                    <!-- Updated Showreel ID -->
+                    <button data-video-id="f2ac3VWpdM0" data-type="long" class="yt-trigger bg-white text-black px-8 md:px-12 py-4 md:py-5 rounded-2xl font-bold text-xs md:text-sm uppercase tracking-widest hover:bg-blue-600 hover:text-white transition-all flex items-center gap-3 md:gap-4">
                         <i class="fa-solid fa-play text-xs"></i> Play Showreel
                     </button>
                     <a href="mailto:maindr408@gmail.com" class="glass px-8 md:px-12 py-4 md:py-5 rounded-2xl font-bold text-xs md:text-sm uppercase tracking-widest hover:border-white transition-all">
@@ -260,12 +274,12 @@
                 </div>
             </div>
 
-            <!-- Hero Video Preview -->
+            <!-- Hero Video Preview Card -->
             <div class="mt-16 md:mt-20 w-full max-w-5xl reveal px-4">
                 <div class="yt-trigger relative group cursor-pointer" data-video-id="f2ac3VWpdM0" data-type="long">
                     <div class="absolute -inset-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-[20px] md:rounded-[40px] blur opacity-10 group-hover:opacity-30 transition"></div>
                     <div class="relative aspect-video bg-neutral-900 rounded-[20px] md:rounded-[35px] overflow-hidden border border-white/10">
-                        <img src="" class="yt-thumb w-full h-full object-cover opacity-60 transition duration-1000 group-hover:scale-105" alt="Showreel">
+                        <img src="" class="yt-thumb w-full h-full object-cover opacity-60 transition duration-1000 group-hover:scale-105" alt="Showreel Thumbnail">
                         <div class="absolute inset-0 flex items-center justify-center">
                             <div class="w-16 h-16 md:w-20 md:h-20 glass rounded-full flex items-center justify-center group-hover:scale-110 transition-all border-white/20">
                                 <i class="fa-solid fa-play text-lg md:text-xl text-white"></i>
@@ -276,16 +290,17 @@
             </div>
         </section>
 
-        <!-- ABOUT SECTION -->
+        <!-- About Me Section -->
         <section id="about" class="py-20 md:py-32 px-6 md:px-12 max-w-7xl mx-auto">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
                 <div class="reveal relative order-2 md:order-1">
                     <div class="aspect-[4/5] max-w-xs md:max-w-md mx-auto rounded-[30px] md:rounded-[40px] overflow-hidden bg-neutral-900 border border-white/10 group shadow-2xl">
-                        <img src="IMG_20251002_102928477_PORTRAIT.jpg" alt="Sachin">
+                        <!-- Updated Portrait Photo -->
+                        <img src="IMG_20251002_102928477_PORTRAIT.jpg" class="w-full h-full object-cover grayscale hover:grayscale-0 transition duration-700" alt="Sachin Dhisle Portrait">
                     </div>
                 </div>
                 <div class="reveal text-left order-1 md:order-2">
-                    <h2 class="text-3xl md:text-5xl font-sync font-bold mb-6 md:mb-8 leading-none">THE MAN <br> BEHIND <span class="text-blue-500">EDIT</span></h2>
+                    <h2 class="text-3xl md:text-5xl font-sync font-bold mb-6 md:mb-8 leading-none uppercase">The Man <br> Behind <span class="text-blue-500">Edit</span></h2>
                     <p class="text-base md:text-lg text-gray-300 mb-6 md:mb-8 font-light leading-relaxed">
                         Namaste! I am <span class="text-white font-bold italic">Sachin Dhisle</span>. Expert in DaVinci Resolve and Premiere Pro. I craft mood and rhythm that keeps viewers hooked.
                     </p>
@@ -314,7 +329,7 @@
             </div>
         </section>
 
-        <!-- WORK: LONG FORMAT -->
+        <!-- Long Form Work Section -->
         <section id="work" class="py-20 md:py-32 px-6 md:px-12 max-w-7xl mx-auto">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 md:mb-16 gap-6">
                 <div class="text-left">
@@ -325,12 +340,12 @@
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
-                <div class="yt-trigger work-card hover-card reveal" data-video-id="dQw4w9WgXcQ" data-type="long">
+                <div class="yt-trigger work-card hover-card reveal" data-video-id="f2ac3VWpdM0" data-type="long">
                     <img src="" class="yt-thumb w-full h-full object-cover opacity-60">
                     <div class="play-overlay"><i class="fa-solid fa-play text-3xl"></i></div>
                     <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent p-6 md:p-10 flex flex-col justify-end pointer-events-none">
-                        <span class="text-blue-500 font-bold uppercase tracking-widest text-[10px] mb-2 text-left">Cinema Edit</span>
-                        <h3 class="text-xl md:text-2xl font-bold text-left">YouTube Project 01</h3>
+                        <span class="text-blue-500 font-bold uppercase tracking-widest text-[10px] mb-2 text-left">Cinematic Edit</span>
+                        <h3 class="text-xl md:text-2xl font-bold text-left uppercase">Episode Title 01</h3>
                     </div>
                 </div>
                 <div class="yt-trigger work-card hover-card reveal" data-video-id="dQw4w9WgXcQ" data-type="long">
@@ -338,7 +353,7 @@
                     <div class="play-overlay"><i class="fa-solid fa-play text-3xl"></i></div>
                     <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent p-6 md:p-10 flex flex-col justify-end pointer-events-none">
                         <span class="text-purple-500 font-bold uppercase tracking-widest text-[10px] mb-2 text-left">Commercial</span>
-                        <h3 class="text-xl md:text-2xl font-bold text-left">YouTube Project 02</h3>
+                        <h3 class="text-xl md:text-2xl font-bold text-left uppercase">Project Name 02</h3>
                     </div>
                 </div>
             </div>
@@ -348,40 +363,44 @@
     <!-- PAGE: REELS (YOUTUBE SHORTS) -->
     <main id="reels-page" class="page min-h-screen pt-32 md:pt-40 px-6 md:px-12 pb-20">
         <div class="max-w-7xl mx-auto text-left">
-            <h2 class="text-4xl md:text-7xl font-sync font-bold leading-none mb-4 tracking-tighter">YOUTUBE <br> <span class="gradient-text">SHORTS</span></h2>
+            <h2 class="text-4xl md:text-7xl font-sync font-bold leading-none mb-4 tracking-tighter uppercase">Youtube <br> <span class="gradient-text">Shorts</span></h2>
             <p class="text-gray-500 md:text-xl font-light mb-10 md:mb-16">High-retention vertical content.</p>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-                <div class="yt-trigger reel-card hover-card reveal" data-video-id="cyuelUYACV0" data-type="short">
-                    <img src="" class="yt-thumb w-full h-full object-cover opacity-50">
-                    <div class="play-overlay"><i class="fa-solid fa-play text-2xl"></i></div>
-                    <div class="absolute inset-0 p-6 md:p-8 flex flex-col justify-end bg-gradient-to-t from-black via-transparent to-transparent pointer-events-none">
-                        <h4 class="font-bold text-lg md:text-xl text-left">Vlog Short</h4>
-                        <p class="text-[10px] text-gray-500 mt-1 uppercase tracking-widest text-left">Viral Style</p>
-                    </div>
-                </div>
+                <!-- Short 01 -->
                 <div class="yt-trigger reel-card hover-card reveal" data-video-id="dQw4w9WgXcQ" data-type="short">
                     <img src="" class="yt-thumb w-full h-full object-cover opacity-50">
                     <div class="play-overlay"><i class="fa-solid fa-play text-2xl"></i></div>
                     <div class="absolute inset-0 p-6 md:p-8 flex flex-col justify-end bg-gradient-to-t from-black via-transparent to-transparent pointer-events-none">
-                        <h4 class="font-bold text-lg md:text-xl text-left">Podcast Clip</h4>
-                        <p class="text-[10px] text-gray-500 mt-1 uppercase tracking-widest text-left">Retention Hack</p>
+                        <h4 class="font-bold text-lg md:text-xl text-left uppercase tracking-tighter">Viral Vlog</h4>
+                        <p class="text-[10px] text-gray-500 mt-1 uppercase tracking-widest text-left">Retention Edit</p>
                     </div>
                 </div>
+                <!-- Short 02 -->
                 <div class="yt-trigger reel-card hover-card reveal" data-video-id="dQw4w9WgXcQ" data-type="short">
                     <img src="" class="yt-thumb w-full h-full object-cover opacity-50">
                     <div class="play-overlay"><i class="fa-solid fa-play text-2xl"></i></div>
                     <div class="absolute inset-0 p-6 md:p-8 flex flex-col justify-end bg-gradient-to-t from-black via-transparent to-transparent pointer-events-none">
-                        <h4 class="font-bold text-lg md:text-xl text-left">Gaming Reel</h4>
-                        <p class="text-[10px] text-gray-500 mt-1 uppercase tracking-widest text-left">Beat Sync</p>
+                        <h4 class="font-bold text-lg md:text-xl text-left uppercase tracking-tighter">Podcast Hook</h4>
+                        <p class="text-[10px] text-gray-500 mt-1 uppercase tracking-widest text-left">Caption Mastery</p>
                     </div>
                 </div>
+                <!-- Short 03 -->
                 <div class="yt-trigger reel-card hover-card reveal" data-video-id="dQw4w9WgXcQ" data-type="short">
                     <img src="" class="yt-thumb w-full h-full object-cover opacity-50">
                     <div class="play-overlay"><i class="fa-solid fa-play text-2xl"></i></div>
                     <div class="absolute inset-0 p-6 md:p-8 flex flex-col justify-end bg-gradient-to-t from-black via-transparent to-transparent pointer-events-none">
-                        <h4 class="font-bold text-lg md:text-xl text-left">Visual Ad</h4>
-                        <p class="text-[10px] text-gray-500 mt-1 uppercase tracking-widest text-left">Color Grade</p>
+                        <h4 class="font-bold text-lg md:text-xl text-left uppercase tracking-tighter">Gaming Flow</h4>
+                        <p class="text-[10px] text-gray-400 mt-1 uppercase tracking-widest text-left">Beat Sync</p>
+                    </div>
+                </div>
+                <!-- Short 04 -->
+                <div class="yt-trigger reel-card hover-card reveal" data-video-id="dQw4w9WgXcQ" data-type="short">
+                    <img src="" class="yt-thumb w-full h-full object-cover opacity-50">
+                    <div class="play-overlay"><i class="fa-solid fa-play text-2xl"></i></div>
+                    <div class="absolute inset-0 p-6 md:p-8 flex flex-col justify-end bg-gradient-to-t from-black via-transparent to-transparent pointer-events-none">
+                        <h4 class="font-bold text-lg md:text-xl text-left uppercase tracking-tighter">Visual Ad</h4>
+                        <p class="text-[10px] text-gray-400 mt-1 uppercase tracking-widest text-left">Color Grade</p>
                     </div>
                 </div>
             </div>
@@ -416,12 +435,12 @@
             </div>
         </div>
         <div class="mt-20 md:mt-32 text-center text-gray-800 font-sync text-[8px] tracking-[0.5em] uppercase border-t border-white/5 pt-12">
-            <p>© 2024 Sachin Dhisle • Designed for TechMode</p>
+            <p>© 2024 Sachin Dhisle • Designed for TechMode Studio</p>
         </div>
     </footer>
 
     <script>
-        // MOBILE MENU LOGIC
+        // Hamburger Menu Toggle
         function toggleMenu() {
             const menu = document.getElementById('mobile-menu');
             if(menu.style.display === 'flex') {
@@ -433,26 +452,32 @@
             }
         }
 
-        // SMART YOUTUBE HANDLER
+        // Improved Youtube Thumbnail & Trigger Logic
         document.addEventListener('DOMContentLoaded', () => {
             const triggers = document.querySelectorAll('.yt-trigger');
             
             triggers.forEach(trigger => {
                 const videoId = trigger.getAttribute('data-video-id');
-                const type = trigger.getAttribute('data-type');
                 const thumb = trigger.querySelector('.yt-thumb');
 
                 if(thumb && videoId) {
-                    const quality = (type === 'short') ? 'hqdefault' : 'maxresdefault';
-                    thumb.src = `https://img.youtube.com/vi/${videoId}/${quality}.jpg`;
-                    thumb.onerror = () => {
-                        thumb.src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+                    // hqdefault is safest for all video types
+                    thumb.src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+                    
+                    // Try to fetch maxresdefault for better quality
+                    const highRes = new Image();
+                    highRes.src = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+                    highRes.onload = () => {
+                        if(highRes.width > 120) { // Valid YouTube thumbnail check
+                            thumb.src = highRes.src;
+                        }
                     };
                 }
 
                 trigger.onclick = (e) => {
                     e.stopPropagation();
-                    openVideo(videoId, type === 'short');
+                    const isShort = trigger.getAttribute('data-type') === 'short';
+                    openVideo(videoId, isShort);
                 };
             });
         });
@@ -487,7 +512,6 @@
             });
             document.getElementById(pageId + '-page').classList.add('active');
             
-            // Close mobile menu if it's open
             const menu = document.getElementById('mobile-menu');
             menu.style.display = 'none';
             document.body.style.overflow = 'auto';
@@ -496,7 +520,7 @@
             setTimeout(reveal, 200); 
         }
 
-        // Custom Cursor
+        // Custom Cursor Movement
         const cursor = document.getElementById('cursor');
         const outline = document.getElementById('cursor-outline');
 
@@ -511,6 +535,7 @@
             }
         });
 
+        // Hover animations for interactive elements
         document.querySelectorAll('a, button, .cursor-pointer, .yt-trigger').forEach(link => {
             link.addEventListener('mouseenter', () => {
                 if(window.innerWidth > 768) {
@@ -530,6 +555,7 @@
             });
         });
 
+        // Simple Intersection Observer for scroll animations
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
             for (var i = 0; i < reveals.length; i++) {
