@@ -1,230 +1,480 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sachin Dhisle | Video Editor Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    :root {
-      --primary: #00ff88;
-      --primary-dark: #00cc66;
-      --secondary: #0a0a0a;
-      --accent: #1a1a1a;
-      --text: #ffffff;
-      --text-muted: #b0b0b0;
-      --gradient: linear-gradient(135deg, #00ff88, #00cc66, #009944);
-      --glass: rgba(255, 255, 255, 0.05);
-      --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-      --glow: 0 0 20px rgba(0, 255, 136, 0.3);
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechMode | Sachin Dhisle - Professional Video Editor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --accent: #3b82f6;
+            --accent-glow: rgba(59, 130, 246, 0.5);
+            --bg: #050505;
+            --card: #0d0d0d;
+        }
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background: #000;
-      color: var(--text);
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
+        body {
+            background-color: var(--bg);
+            color: #ffffff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+            cursor: none;
+        }
 
-    /* Background Animation */
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: radial-gradient(circle at 20% 80%, rgba(0, 255, 136, 0.1) 0%, transparent 50%),
-                  radial-gradient(circle at 80% 20%, rgba(0, 255, 136, 0.1) 0%, transparent 50%);
-      z-index: -1;
-      animation: floating 20s infinite ease-in-out;
-    }
+        .font-sync { font-family: 'Syncopate', sans-serif; }
 
-    @keyframes floating {
-      0%, 100% { transform: scale(1) rotate(0deg); }
-      50% { transform: scale(1.1) rotate(180deg); }
-    }
+        /* Noise Texture Overlay */
+        .noise::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            opacity: 0.03;
+            z-index: 9999;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
 
-    /* Navbar */
-    .navbar {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      background: rgba(0, 0, 0, 0.95);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(0, 255, 136, 0.2);
-      z-index: 1000;
-      padding: 1rem 0;
-    }
+        /* Modern Grid Background */
+        .grid-bg {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
+        }
 
-    .nav-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+        /* Custom Cursor */
+        #cursor {
+            width: 8px;
+            height: 8px;
+            background: #fff;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 10001;
+            transition: transform 0.1s ease;
+        }
 
-    .nav-logo { display: flex; align-items: center; gap: 0.5rem; font-weight: 700; font-size: 1.5rem; }
-    .logo-icon { width: 40px; height: 40px; background: var(--gradient); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #000; }
-    .logo-text { background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    .nav-menu { display: flex; gap: 2rem; align-items: center; }
-    .nav-link { color: var(--text); text-decoration: none; font-weight: 500; transition: 0.3s; }
-    .nav-link:hover { color: var(--primary); }
+        #cursor-outline {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 10000;
+            transition: all 0.2s ease-out;
+        }
 
-    /* Hero Section */
-    header {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding-top: 80px;
-    }
+        .glass {
+            background: rgba(15, 15, 15, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
 
-    .hero-content { max-width: 800px; padding: 2rem; }
-    .profile-photo {
-      width: 180px; height: 180px; border-radius: 50%; margin: 0 auto 2rem;
-      position: relative; background: var(--gradient); padding: 4px; box-shadow: var(--glow);
-    }
-    .profile-photo img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 4px solid #000; }
+        .gradient-text {
+            background: linear-gradient(135deg, #fff 30%, #3b82f6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-    .hero-title { font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 800; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.5rem; }
-    .hero-subtitle { font-size: clamp(1.2rem, 3vw, 1.8rem); color: var(--text-muted); margin-bottom: 1.5rem; }
+        .page { display: none; }
+        .page.active { display: block; animation: pageFade 0.8s cubic-bezier(0.23, 1, 0.32, 1); }
 
-    .btn {
-      padding: 1rem 2rem; border-radius: 50px; text-decoration: none; font-weight: 600;
-      display: inline-flex; align-items: center; gap: 0.5rem; transition: 0.3s;
-    }
-    .btn-primary { background: var(--gradient); color: #000; box-shadow: var(--glow); }
-    .btn-whatsapp { background: #25D366; color: white; margin-left: 10px; }
+        @keyframes pageFade {
+            from { opacity: 0; filter: blur(10px); transform: scale(0.98); }
+            to { opacity: 1; filter: blur(0); transform: scale(1); }
+        }
 
-    /* Video Sections */
-    .section { padding: 6rem 2rem; max-width: 1200px; margin: auto; }
-    .section-title { font-size: 2.5rem; text-align: center; margin-bottom: 3rem; position: relative; }
-    .section-title::after { content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 60px; height: 4px; background: var(--gradient); }
+        /* Ratios */
+        .reel-card { aspect-ratio: 9/16; }
+        .work-card { aspect-ratio: 16/9; }
 
-    .video-gallery { display: grid; gap: 1.5rem; margin-top: 2rem; }
-    .reels-grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
-    .long-grid { grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); }
+        .hover-card {
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .hover-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
 
-    .video-card {
-      background: #000; border-radius: 20px; overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.1); position: relative; transition: 0.3s;
-    }
-    .video-card:hover { transform: translateY(-10px); border-color: var(--primary); box-shadow: var(--glow); }
-    
-    /* YouTube Responsive Containers */
-    .video-card-reel { padding-top: 177.78%; } /* 9:16 */
-    .video-card-long { padding-top: 56.25%; } /* 16:9 */
+        /* Video Modal */
+        #videoModal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.98);
+            z-index: 10002;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        #modalContainer {
+            position: relative;
+            width: 100%;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 0 100px rgba(59, 130, 246, 0.2);
+        }
 
-    .video-card iframe {
-      position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;
-    }
+        .reveal { opacity: 0; transform: translateY(40px); transition: 1s cubic-bezier(0.23, 1, 0.32, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
 
-    .video-category { color: var(--primary); font-size: 1.5rem; margin: 3rem 0 1rem; text-align: center; }
-
-    /* Services & Contact */
-    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
-    .service-card { background: var(--glass); padding: 2rem; border-radius: 20px; text-align: center; border: 1px solid rgba(255, 255, 255, 0.1); }
-    
-    .contact-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 2rem; }
-    .contact-card { background: var(--glass); padding: 2rem; border-radius: 20px; text-align: center; text-decoration: none; color: white; border: 1px solid rgba(255, 255, 255, 0.1); }
-
-    footer { text-align: center; padding: 3rem; background: #0a0a0a; border-top: 1px solid rgba(255,255,255,0.1); }
-
-    @media (max-width: 768px) {
-      .reels-grid { grid-template-columns: repeat(2, 1fr); }
-      .nav-menu { display: none; } /* Mobile menu simplified for code length */
-    }
-  </style>
+        .whatsapp-float {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            background: #fff;
+            color: #000;
+            width: 60px;
+            height: 60px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            z-index: 1000;
+            transition: 0.4s;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .whatsapp-float:hover { transform: rotate(-10deg) scale(1.1); background: #25d366; color: #fff; }
+    </style>
 </head>
-<body>
+<body class="noise grid-bg">
 
-  <nav class="navbar">
-    <div class="nav-container">
-      <div class="nav-logo">
-        <div class="logo-icon"><i class="fas fa-video"></i></div>
-        <span class="logo-text">TechMode</span>
-      </div>
-      <div class="nav-menu">
-        <a href="#home" class="nav-link">Home</a>
-        <a href="#work" class="nav-link">Work</a>
-        <a href="#services" class="nav-link">Services</a>
-        <a href="#contact" class="nav-link">Contact</a>
-      </div>
-    </div>
-  </nav>
+    <!-- Custom Cursor -->
+    <div id="cursor"></div>
+    <div id="cursor-outline"></div>
 
-  <header id="home">
-    <div class="hero-content">
-      <div class="profile-photo"><img src="profile-pic.png" alt="Sachin"></div>
-      <h1 class="hero-title">Sachin Dhisle</h1>
-      <h2 class="hero-subtitle">Video Editor & Storyteller</h2>
-      <div class="cta-buttons">
-        <a href="#work" class="btn btn-primary">My Work</a>
-        <a href="https://wa.me/919359876866" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-      </div>
-    </div>
-  </header>
-
-  <section class="section" id="work">
-    <h2 class="section-title">My Projects</h2>
-
-    <h3 class="video-category">Short Videos (9:16)</h3>
-    <div class="video-gallery reels-grid">
-      <div class="video-card video-card-reel">
-        <iframe src="https://www.youtube.com/embed/YOUR_SHORT_ID_1" allowfullscreen></iframe>
-      </div>
-      <div class="video-card video-card-reel">
-        <iframe src="https://www.youtube.com/embed/cyuelUYACV0" allowfullscreen></iframe>
-      </div>
-      <div class="video-card video-card-reel">
-        <iframe src="https://www.youtube.com/embed/YOUR_SHORT_ID_3" allowfullscreen></iframe>
-      </div>
-      <div class="video-card video-card-reel">
-        <iframe src="https://www.youtube.com/embed/YOUR_SHORT_ID_4" allowfullscreen></iframe>
-      </div>
+    <!-- Video Modal -->
+    <div id="videoModal" onclick="closeVideo()">
+        <div id="modalContainer" class="max-w-5xl shadow-2xl transition-all duration-500">
+            <button class="absolute top-6 right-6 text-white/50 text-xl hover:text-white transition z-10 font-bold uppercase tracking-widest text-[10px] glass px-4 py-2 rounded-full">Close &times;</button>
+            <iframe id="youtubePlayer" class="w-full" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
     </div>
 
-    <h3 class="video-category" style="margin-top: 4rem;">Long Videos (16:9)</h3>
-    <div class="video-gallery long-grid">
-      <div class="video-card video-card-long">
-        <iframe src="https://www.youtube.com/embed/YOUR_LONG_ID_1" allowfullscreen></iframe>
-      </div>
-      <div class="video-card video-card-long">
-        <iframe src="https://www.youtube.com/embed/YOUR_LONG_ID_2" allowfullscreen></iframe>
-      </div>
-      <div class="video-card video-card-long">
-        <iframe src="https://www.youtube.com/embed/YOUR_LONG_ID_3" allowfullscreen></iframe>
-      </div>
-      <div class="video-card video-card-long">
-        <iframe src="https://www.youtube.com/embed/YOUR_LONG_ID_4" allowfullscreen></iframe>
-      </div>
-    </div>
-  </section>
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/919359876866" target="_blank" class="whatsapp-float">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
 
-  <section class="section" id="services">
-    <h2 class="section-title">Services</h2>
-    <div class="services-grid">
-      <div class="service-card"><h3>Cinematic Edits</h3><p>High-quality storytelling</p></div>
-      <div class="service-card"><h3>Color Grading</h3><p>DaVinci Resolve Expert</p></div>
-      <div class="service-card"><h3>Social Media</h3><p>Viral Reels & Shorts</p></div>
-    </div>
-  </section>
+    <!-- Navigation -->
+    <nav class="fixed top-6 left-1/2 -translate-x-1/2 w-[90%] md:w-[70%] z-[100] glass py-4 px-8 rounded-full flex justify-between items-center">
+        <div class="text-xl font-sync font-bold tracking-tighter cursor-pointer group" onclick="showPage('home')">
+            TECH<span class="text-blue-500 group-hover:text-white transition">MODE</span>
+        </div>
+        <div class="hidden md:flex gap-8 text-[10px] uppercase tracking-[0.3em] font-bold text-gray-400">
+            <a href="javascript:void(0)" onclick="showPage('home')" class="hover:text-white transition">Home</a>
+            <a href="javascript:void(0)" onclick="showPage('reels')" class="hover:text-white transition">Shorts</a>
+            <a href="#about" onclick="showPage('home')" class="hover:text-white transition">About</a>
+            <a href="#work" onclick="showPage('home')" class="hover:text-white transition">Work</a>
+        </div>
+        <a href="https://wa.me/919359876866" target="_blank" class="bg-white text-black px-5 py-2 rounded-full text-[10px] font-extrabold uppercase tracking-widest hover:bg-blue-600 hover:text-white transition-all">
+            Contact
+        </a>
+    </nav>
 
-  <section class="section" id="contact">
-    <h2 class="section-title">Contact Me</h2>
-    <div class="contact-cards">
-      <a href="mailto:maindr408@gmail.com" class="contact-card">Email Me</a>
-      <a href="https://instagram.com/sachindhisle" class="contact-card">Instagram</a>
-      <a href="https://wa.me/919359876866" class="contact-card">WhatsApp</a>
-    </div>
-  </section>
+    <!-- PAGE: HOME -->
+    <main id="home-page" class="page active">
+        <!-- Hero Section -->
+        <section class="min-h-screen flex flex-col justify-center items-center px-6 pt-32 relative overflow-hidden">
+            <!-- Background Glows -->
+            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-600/10 blur-[150px] -z-10"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-600/10 blur-[150px] -z-10"></div>
+            
+            <div class="text-center z-10">
+                <div class="inline-flex items-center gap-2 glass px-4 py-1.5 rounded-full text-[10px] uppercase tracking-[0.3em] text-blue-400 mb-10 reveal">
+                    <span class="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span> Available for Projects
+                </div>
+                <!-- Reduced font size for Name -->
+                <h1 class="text-5xl md:text-7xl lg:text-8xl font-sync font-bold mb-4 tracking-tighter leading-none reveal">
+                    SACHIN <br> <span class="gradient-text">DHISLE</span>
+                </h1>
+                <p class="text-gray-400 max-w-xl mx-auto text-base md:text-lg mb-14 reveal font-light leading-relaxed">
+                    Crafting digital narratives through rhythm and motion. Specialized in premium post-production for brands & creators.
+                </p>
+                <div class="flex flex-wrap gap-6 justify-center reveal">
+                    <button onclick="openVideo('dQw4w9WgXcQ', false)" class="bg-white text-black px-12 py-5 rounded-2xl font-bold text-sm uppercase tracking-widest hover:bg-blue-600 hover:text-white transition-all flex items-center gap-4">
+                        <i class="fa-solid fa-play text-xs"></i> Play Showreel
+                    </button>
+                    <a href="mailto:maindr408@gmail.com" class="glass px-12 py-5 rounded-2xl font-bold text-sm uppercase tracking-widest hover:border-white transition-all">
+                        Let's Talk
+                    </a>
+                </div>
+            </div>
 
-  <footer>
-    <p>© 2025 Sachin Dhisle | Built with 💚</p>
-  </footer>
+            <!-- Hero Video -->
+            <div class="mt-20 w-full max-w-5xl reveal px-4">
+                <div class="relative group cursor-pointer" onclick="openVideo('dQw4w9WgXcQ', false)">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-[40px] blur opacity-20 group-hover:opacity-40 transition"></div>
+                    <div class="relative aspect-video bg-neutral-900 rounded-[35px] overflow-hidden border border-white/10">
+                        <img src="https://images.unsplash.com/photo-1621600411688-4be93cd68504?auto=format&fit=crop&w=1500&q=80" class="w-full h-full object-cover opacity-50 transition duration-1000 group-hover:scale-105" alt="Timeline">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="w-20 h-20 glass rounded-full flex items-center justify-center group-hover:scale-110 transition-all duration-500 border-white/20">
+                                <i class="fa-solid fa-play text-xl text-white"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
+        <!-- ABOUT SECTION -->
+        <section id="about" class="py-32 px-6 md:px-12 max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+                <div class="reveal relative">
+                    <div class="aspect-[4/5] max-w-md mx-auto rounded-[40px] overflow-hidden bg-neutral-900 border border-white/10 group">
+                        <!-- REPLACE WITH ACTUAL IMAGE -->
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" alt="Sachin">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60"></div>
+                    </div>
+                </div>
+                <div class="reveal">
+                    <!-- Reduced font size for About -->
+                    <h2 class="text-4xl md:text-5xl font-sync font-bold mb-8 leading-none">THE MAN <br> BEHIND <span class="text-blue-500">EDIT</span></h2>
+                    <p class="text-lg text-gray-300 mb-8 font-light leading-relaxed">
+                        I am <span class="text-white font-bold italic">Sachin Dhisle</span>. Based in India, working globally. I don't just cut clips; I build environments, set moods, and define rhythms that keep viewers hooked.
+                    </p>
+                    <div class="space-y-4 mb-12">
+                        <div class="flex items-center gap-4 text-gray-400 text-sm">
+                            <i class="fa-solid fa-check text-blue-500"></i> Expert in DaVinci Resolve
+                        </div>
+                        <div class="flex items-center gap-4 text-gray-400 text-sm">
+                            <i class="fa-solid fa-check text-blue-500"></i> High-End Color Grading
+                        </div>
+                        <div class="flex items-center gap-4 text-gray-400 text-sm">
+                            <i class="fa-solid fa-check text-blue-500"></i> Viral Content Strategy
+                        </div>
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-8 pt-8 border-t border-white/10">
+                        <div class="text-left">
+                            <p class="text-[10px] uppercase tracking-widest text-gray-500 mb-2">Email Me</p>
+                            <p class="font-bold text-base">maindr408@gmail.com</p>
+                        </div>
+                        <div class="text-left">
+                            <p class="text-[10px] uppercase tracking-widest text-gray-500 mb-2">WhatsApp</p>
+                            <p class="font-bold text-base">+91 9359876866</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Grid -->
+        <section class="py-24 bg-[#080808] border-y border-white/5">
+            <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-12">
+                <div class="text-center reveal">
+                    <p class="text-4xl font-sync font-bold mb-2">500<span class="text-blue-500">+</span></p>
+                    <p class="text-[10px] uppercase tracking-[0.4em] text-gray-500">Projects</p>
+                </div>
+                <div class="text-center reveal" style="transition-delay: 0.1s;">
+                    <p class="text-4xl font-sync font-bold mb-2">15<span class="text-blue-500">M</span></p>
+                    <p class="text-[10px] uppercase tracking-[0.4em] text-gray-500">Views</p>
+                </div>
+                <div class="text-center reveal" style="transition-delay: 0.2s;">
+                    <p class="text-4xl font-sync font-bold mb-2">100<span class="text-blue-500">%</span></p>
+                    <p class="text-[10px] uppercase tracking-[0.4em] text-gray-500">Success</p>
+                </div>
+                <div class="text-center reveal" style="transition-delay: 0.3s;">
+                    <p class="text-4xl font-sync font-bold mb-2">24<span class="text-blue-500">H</span></p>
+                    <p class="text-[10px] uppercase tracking-[0.4em] text-gray-500">Fast</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- WORK: LONG FORMAT -->
+        <section id="work" class="py-32 px-6 md:px-12 max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8 text-left">
+                <div>
+                    <!-- Reduced font size for Long Form title -->
+                    <h2 class="text-4xl md:text-6xl font-sync font-bold tracking-tighter uppercase leading-none">Long <span class="text-blue-500">Form</span></h2>
+                    <p class="text-gray-500 mt-4 text-lg font-light">Documentaries, commercials, and cinematic storytelling.</p>
+                </div>
+                <button onclick="showPage('reels')" class="glass px-8 py-4 rounded-2xl text-[10px] uppercase font-bold tracking-widest hover:bg-white hover:text-black transition">Switch to Shorts</button>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <div class="work-card hover-card reveal" onclick="openVideo('dQw4w9WgXcQ', false)">
+                    <img src="https://images.unsplash.com/photo-1535016120720-40c646bebbdc?auto=format&fit=crop&w=1200&q=80" class="w-full h-full object-cover opacity-60">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent p-10 flex flex-col justify-end">
+                        <span class="text-blue-500 font-bold uppercase tracking-widest text-[10px] mb-3 text-left">Cinema Edit</span>
+                        <h3 class="text-2xl md:text-3xl font-bold text-left">The Silent Peak</h3>
+                    </div>
+                </div>
+                <div class="work-card hover-card reveal" style="transition-delay: 0.2s;" onclick="openVideo('dQw4w9WgXcQ', false)">
+                    <img src="https://images.unsplash.com/photo-1598897349489-3d0d58e01237?auto=format&fit=crop&w=1200&q=80" class="w-full h-full object-cover opacity-60">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent p-10 flex flex-col justify-end">
+                        <span class="text-purple-500 font-bold uppercase tracking-widest text-[10px] mb-3 text-left">Commercial</span>
+                        <h3 class="text-2xl md:text-3xl font-bold text-left">Urban Flow X</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- PAGE: REELS (9:16) -->
+    <main id="reels-page" class="page min-h-screen pt-40 px-6 md:px-12 pb-20">
+        <div class="max-w-7xl mx-auto">
+            <!-- Reduced font size for Shorts title -->
+            <h2 class="text-5xl md:text-7xl font-sync font-bold leading-none mb-4 tracking-tighter">YOUTUBE <br> <span class="gradient-text">SHORTS</span></h2>
+            <p class="text-gray-500 text-xl font-light mb-16">Optimized for retention. Built for the algorithm.</p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Short 1 -->
+                <div class="reel-card hover-card reveal" onclick="openVideo('dQw4w9WgXcQ', true)">
+                    <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover opacity-50">
+                    <div class="absolute inset-0 p-8 flex flex-col justify-end bg-gradient-to-t from-black via-transparent to-transparent">
+                        <h4 class="font-bold text-xl text-left">Viral Vlog</h4>
+                        <p class="text-[10px] text-gray-500 mt-2 uppercase tracking-widest text-left">High-Energy Edit</p>
+                    </div>
+                </div>
+                <!-- Short 2 -->
+                <div class="reel-card hover-card reveal" onclick="openVideo('dQw4w9WgXcQ', true)">
+                    <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover opacity-50">
+                    <div class="absolute inset-0 p-8 flex flex-col justify-end bg-gradient-to-t from-black via-transparent to-transparent">
+                        <h4 class="font-bold text-xl text-left">Podcast Clip</h4>
+                        <p class="text-[10px] text-gray-500 mt-2 uppercase tracking-widest text-left">Smart Captions</p>
+                    </div>
+                </div>
+                <!-- Short 3 -->
+                <div class="reel-card hover-card reveal" onclick="openVideo('dQw4w9WgXcQ', true)">
+                    <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover opacity-50">
+                    <div class="absolute inset-0 p-8 flex flex-col justify-end bg-gradient-to-t from-black via-transparent to-transparent">
+                        <h4 class="font-bold text-xl text-left">Gaming Reel</h4>
+                        <p class="text-[10px] text-gray-500 mt-2 uppercase tracking-widest text-left">SFX Design</p>
+                    </div>
+                </div>
+                <!-- Short 4 -->
+                <div class="reel-card hover-card reveal" onclick="openVideo('dQw4w9WgXcQ', true)">
+                    <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover opacity-50">
+                    <div class="absolute inset-0 p-8 flex flex-col justify-end bg-gradient-to-t from-black via-transparent to-transparent">
+                        <h4 class="font-bold text-xl text-left">Visual Ad</h4>
+                        <p class="text-[10px] text-gray-500 mt-2 uppercase tracking-widest text-left">Color Grade</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-20 text-center">
+                <button onclick="showPage('home')" class="text-blue-500 font-sync text-[10px] uppercase tracking-[0.5em] hover:text-white transition">Back to Main Overview</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer id="contact" class="py-32 px-6 md:px-12 bg-[#030303] border-t border-white/5 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-20">
+            <div class="max-w-3xl text-left">
+                <!-- Reduced font size for Contact title -->
+                <h2 class="text-5xl md:text-7xl font-sync font-bold mb-12 uppercase tracking-tighter leading-none">Let's <br> <span class="text-blue-500">Create</span></h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-12">
+                    <div>
+                        <p class="text-gray-600 uppercase tracking-widest text-[10px] mb-4">Drop a line</p>
+                        <a href="mailto:maindr408@gmail.com" class="text-2xl font-bold hover:text-blue-500 transition border-b border-white/10 pb-2">maindr408@gmail.com</a>
+                    </div>
+                    <div>
+                        <p class="text-gray-600 uppercase tracking-widest text-[10px] mb-4">Instant Chat</p>
+                        <a href="https://wa.me/919359876866" class="text-2xl font-bold hover:text-blue-500 transition">+91 9359876866</a>
+                    </div>
+                </div>
+                <div class="mt-16 flex gap-10">
+                    <a href="https://instagram.com/sachindhisle" target="_blank" class="text-2xl text-gray-500 hover:text-pink-500 transition"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://wa.me/919359876866" target="_blank" class="text-2xl text-gray-500 hover:text-green-500 transition"><i class="fa-brands fa-whatsapp"></i></a>
+                </div>
+            </div>
+            
+            <div class="w-full md:w-[350px] glass p-10 rounded-[40px] text-left">
+                <p class="text-blue-500 font-bold mb-4 uppercase tracking-widest text-[10px] italic">Open for Bookings</p>
+                <h4 class="text-xl font-bold mb-8 leading-tight">Bring your raw footage, I'll bring the magic.</h4>
+                <a href="https://wa.me/919359876866" class="w-full bg-white text-black py-4 rounded-2xl font-bold uppercase tracking-widest text-center block hover:bg-blue-600 hover:text-white transition">Hire Now</a>
+            </div>
+        </div>
+        <div class="mt-32 flex flex-col md:flex-row justify-between items-center text-gray-800 font-sync text-[8px] tracking-[0.5em] uppercase border-t border-white/5 pt-12">
+            <p>© 2024 Sachin Dhisle</p>
+            <p>Designed for TechMode • All Rights Reserved</p>
+        </div>
+    </footer>
+
+    <script>
+        const modal = document.getElementById('videoModal');
+        const player = document.getElementById('youtubePlayer');
+        const modalContainer = document.getElementById('modalContainer');
+
+        function openVideo(videoId, isShort) {
+            player.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            
+            if (isShort) {
+                modalContainer.style.maxWidth = "380px";
+                modalContainer.style.aspectRatio = "9/16";
+            } else {
+                modalContainer.style.maxWidth = "1100px";
+                modalContainer.style.aspectRatio = "16/9";
+            }
+        }
+
+        function closeVideo() {
+            player.src = '';
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(pageId + '-page').classList.add('active');
+            window.scrollTo({top: 0, behavior: 'smooth'});
+            setTimeout(reveal, 200); 
+        }
+
+        const cursor = document.getElementById('cursor');
+        const outline = document.getElementById('cursor-outline');
+
+        window.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            outline.animate({
+                left: `${e.clientX - 20}px`,
+                top: `${e.clientY - 20}px`
+            }, { duration: 400, fill: "forwards" });
+        });
+
+        document.querySelectorAll('a, button, .cursor-pointer').forEach(link => {
+            link.addEventListener('mouseenter', () => {
+                cursor.style.transform = 'scale(5)';
+                cursor.style.background = '#fff';
+                cursor.style.mixBlendMode = 'difference';
+                outline.style.borderColor = '#fff';
+            });
+            link.addEventListener('mouseleave', () => {
+                cursor.style.transform = 'scale(1)';
+                cursor.style.background = '#fff';
+                cursor.style.mixBlendMode = 'normal';
+                outline.style.borderColor = 'rgba(255,255,255,0.3)';
+            });
+        });
+
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        reveal();
+    </script>
 </body>
 </html>
