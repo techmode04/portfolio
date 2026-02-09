@@ -127,7 +127,6 @@
             box-shadow: 0 0 100px rgba(59, 130, 246, 0.2);
         }
 
-        /* Mobile Close Button Styling */
         @media (max-width: 640px) {
             #modalContainer { border-radius: 12px; }
             .modal-close-btn { 
@@ -266,7 +265,7 @@
                     <button data-video-id="f2ac3VWpdM0" data-type="long" class="yt-trigger bg-white text-black px-8 md:px-12 py-4 md:py-5 rounded-2xl font-bold text-xs md:text-sm uppercase tracking-widest hover:bg-blue-600 hover:text-white transition-all flex items-center gap-3 md:gap-4">
                         <i class="fa-solid fa-play text-xs"></i> Showreel
                     </button>
-                    <button onclick="showPage('reels')" class="glass px-8 md:px-12 py-4 md:py-5 rounded-2xl font-bold text-xs md:text-sm uppercase tracking-widest hover:border-blue-500 transition-all flex items-center gap-3">
+                    <button onclick="showPage('reels')" class="glass px-8 md:px-12 py-4 md:py-5 rounded-2xl font-bold text-xs md:text-sm uppercase tracking-widest hover:border-blue-500 transition-all flex items-center gap-3 text-white">
                         <i class="fa-solid fa-bolt text-blue-500"></i> Explore Shorts
                     </button>
                 </div>
@@ -312,9 +311,8 @@
                         </div>
                     </div>
                     
-                    <!-- Updated Contact Logos Section -->
+                    <!-- Contact Logos -->
                     <div class="flex flex-col sm:flex-row gap-8 pt-8 border-t border-white/10">
-                        <!-- Email Link -->
                         <a href="mailto:maindr408@gmail.com" class="group flex items-center gap-4 cursor-pointer">
                             <div class="w-14 h-14 glass rounded-full flex items-center justify-center text-blue-400 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300">
                                 <i class="fa-solid fa-envelope text-xl md:text-2xl"></i>
@@ -324,7 +322,6 @@
                                 <p class="text-xs md:text-sm font-bold text-white opacity-80 group-hover:opacity-100 transition">maindr408@gmail.com</p>
                             </div>
                         </a>
-                        <!-- WhatsApp Link -->
                         <a href="https://wa.me/919359876866" target="_blank" class="group flex items-center gap-4 cursor-pointer">
                             <div class="w-14 h-14 glass rounded-full flex items-center justify-center text-green-500 group-hover:bg-green-600 group-hover:text-white transition-all duration-300">
                                 <i class="fa-brands fa-whatsapp text-2xl md:text-3xl"></i>
@@ -339,7 +336,7 @@
             </div>
         </section>
 
-        <!-- Long Form Work Preview -->
+        <!-- Long Form Work Preview (Home) -->
         <section id="work" class="py-20 md:py-32 px-6 md:px-12 max-w-7xl mx-auto">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 md:mb-16 gap-6">
                 <div class="text-left">
@@ -353,7 +350,7 @@
                     <img src="" class="yt-thumb w-full h-full object-cover opacity-60">
                     <div class="play-overlay"><i class="fa-solid fa-play text-3xl"></i></div>
                     <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent p-6 md:p-10 flex flex-col justify-end pointer-events-none">
-                        <span class="text-blue-500 font-bold uppercase tracking-widest text-[10px] mb-2 text-left">Showreel</span>
+                        <span class="text-blue-500 font-bold uppercase tracking-widest text-[10px] mb-2 text-left text-white">Showreel</span>
                         <h3 class="text-xl md:text-2xl font-bold text-left uppercase text-white">Master Edit 2024</h3>
                     </div>
                 </div>
@@ -361,7 +358,7 @@
                     <img src="" class="yt-thumb w-full h-full object-cover opacity-60">
                     <div class="play-overlay"><i class="fa-solid fa-play text-3xl"></i></div>
                     <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent p-6 md:p-10 flex flex-col justify-end pointer-events-none">
-                        <span class="text-purple-500 font-bold uppercase tracking-widest text-[10px] mb-2 text-left">Cinematic</span>
+                        <span class="text-purple-500 font-bold uppercase tracking-widest text-[10px] mb-2 text-left text-white">Cinematic</span>
                         <h3 class="text-xl md:text-2xl font-bold text-left uppercase text-white">Nature Documentary</h3>
                     </div>
                 </div>
@@ -374,7 +371,7 @@
             </div>
         </section>
 
-        <!-- Shorts Preview Section -->
+        <!-- Shorts Preview Section (Home) -->
         <section class="py-20 md:py-32 px-6 md:px-12 max-w-7xl mx-auto border-t border-white/5">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 md:mb-16 gap-6">
                 <div class="text-left">
@@ -406,13 +403,14 @@
         </section>
     </main>
 
-    <!-- PAGE: LONG FORM (NEW PAGE) -->
+    <!-- PAGE: LONG FORM (6 VIDEOS) -->
     <main id="longform-page" class="page min-h-screen pt-32 md:pt-40 px-6 md:px-12 pb-20">
         <div class="max-w-7xl mx-auto text-left">
-            <h2 class="text-4xl md:text-7xl font-sync font-bold leading-none mb-4 tracking-tighter uppercase">Cinematic <br> <span class="gradient-text">Long Form</span></h2>
+            <h2 class="text-4xl md:text-7xl font-sync font-bold leading-none mb-4 tracking-tighter uppercase text-white">Cinematic <br> <span class="gradient-text">Long Form</span></h2>
             <p class="text-gray-300 md:text-xl font-light mb-10 md:mb-16">High-end video productions with cinematic flair.</p>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+                <!-- Video 1 -->
                 <div class="yt-trigger work-card hover-card reveal" data-video-id="f2ac3VWpdM0" data-type="long">
                     <img src="" class="yt-thumb w-full h-full object-cover opacity-60">
                     <div class="play-overlay"><i class="fa-solid fa-play text-3xl"></i></div>
@@ -420,11 +418,44 @@
                         <h3 class="text-lg font-bold uppercase text-white">Project Alpha</h3>
                     </div>
                 </div>
+                <!-- Video 2 -->
                 <div class="yt-trigger work-card hover-card reveal" data-video-id="dQw4w9WgXcQ" data-type="long">
                     <img src="" class="yt-thumb w-full h-full object-cover opacity-60">
                     <div class="play-overlay"><i class="fa-solid fa-play text-3xl"></i></div>
                     <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent p-6 flex flex-col justify-end pointer-events-none">
                         <h3 class="text-lg font-bold uppercase text-white">Corporate Vision</h3>
+                    </div>
+                </div>
+                <!-- Video 3 -->
+                <div class="yt-trigger work-card hover-card reveal" data-video-id="f2ac3VWpdM0" data-type="long">
+                    <img src="" class="yt-thumb w-full h-full object-cover opacity-60">
+                    <div class="play-overlay"><i class="fa-solid fa-play text-3xl"></i></div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent p-6 flex flex-col justify-end pointer-events-none">
+                        <h3 class="text-lg font-bold uppercase text-white">Wedding Story</h3>
+                    </div>
+                </div>
+                <!-- Video 4 -->
+                <div class="yt-trigger work-card hover-card reveal" data-video-id="dQw4w9WgXcQ" data-type="long">
+                    <img src="" class="yt-thumb w-full h-full object-cover opacity-60">
+                    <div class="play-overlay"><i class="fa-solid fa-play text-3xl"></i></div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent p-6 flex flex-col justify-end pointer-events-none">
+                        <h3 class="text-lg font-bold uppercase text-white">Music Video</h3>
+                    </div>
+                </div>
+                <!-- Video 5 -->
+                <div class="yt-trigger work-card hover-card reveal" data-video-id="f2ac3VWpdM0" data-type="long">
+                    <img src="" class="yt-thumb w-full h-full object-cover opacity-60">
+                    <div class="play-overlay"><i class="fa-solid fa-play text-3xl"></i></div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent p-6 flex flex-col justify-end pointer-events-none">
+                        <h3 class="text-lg font-bold uppercase text-white">Cinematic Ad</h3>
+                    </div>
+                </div>
+                <!-- Video 6 -->
+                <div class="yt-trigger work-card hover-card reveal" data-video-id="dQw4w9WgXcQ" data-type="long">
+                    <img src="" class="yt-thumb w-full h-full object-cover opacity-60">
+                    <div class="play-overlay"><i class="fa-solid fa-play text-3xl"></i></div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent p-6 flex flex-col justify-end pointer-events-none">
+                        <h3 class="text-lg font-bold uppercase text-white">Event Highlights</h3>
                     </div>
                 </div>
             </div>
@@ -437,14 +468,40 @@
         </div>
     </main>
 
-    <!-- PAGE: REELS (FULL PAGE) -->
+    <!-- PAGE: SHORTS (6 VIDEOS) -->
     <main id="reels-page" class="page min-h-screen pt-32 md:pt-40 px-6 md:px-12 pb-20">
         <div class="max-w-7xl mx-auto text-left">
-            <h2 class="text-4xl md:text-7xl font-sync font-bold leading-none mb-4 tracking-tighter uppercase">Youtube <br> <span class="gradient-text">Shorts</span></h2>
+            <h2 class="text-4xl md:text-7xl font-sync font-bold leading-none mb-4 tracking-tighter uppercase text-white">Youtube <br> <span class="gradient-text">Shorts</span></h2>
             <p class="text-gray-300 md:text-xl font-light mb-10 md:mb-16">Explore my full collection of vertical content.</p>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
+                <!-- Short 1 -->
                 <div class="yt-trigger reel-card hover-card reveal" data-video-id="cyuelUYACV0" data-type="short">
+                    <img src="" class="yt-thumb w-full h-full object-cover opacity-50">
+                    <div class="play-overlay"><i class="fa-solid fa-play text-2xl"></i></div>
+                </div>
+                <!-- Short 2 -->
+                <div class="yt-trigger reel-card hover-card reveal" data-video-id="0J0AYlz35wM" data-type="short">
+                    <img src="" class="yt-thumb w-full h-full object-cover opacity-50">
+                    <div class="play-overlay"><i class="fa-solid fa-play text-2xl"></i></div>
+                </div>
+                <!-- Short 3 -->
+                <div class="yt-trigger reel-card hover-card reveal" data-video-id="dQw4w9WgXcQ" data-type="short">
+                    <img src="" class="yt-thumb w-full h-full object-cover opacity-50">
+                    <div class="play-overlay"><i class="fa-solid fa-play text-2xl"></i></div>
+                </div>
+                <!-- Short 4 -->
+                <div class="yt-trigger reel-card hover-card reveal" data-video-id="cyuelUYACV0" data-type="short">
+                    <img src="" class="yt-thumb w-full h-full object-cover opacity-50">
+                    <div class="play-overlay"><i class="fa-solid fa-play text-2xl"></i></div>
+                </div>
+                <!-- Short 5 -->
+                <div class="yt-trigger reel-card hover-card reveal" data-video-id="0J0AYlz35wM" data-type="short">
+                    <img src="" class="yt-thumb w-full h-full object-cover opacity-50">
+                    <div class="play-overlay"><i class="fa-solid fa-play text-2xl"></i></div>
+                </div>
+                <!-- Short 6 -->
+                <div class="yt-trigger reel-card hover-card reveal" data-video-id="dQw4w9WgXcQ" data-type="short">
                     <img src="" class="yt-thumb w-full h-full object-cover opacity-50">
                     <div class="play-overlay"><i class="fa-solid fa-play text-2xl"></i></div>
                 </div>
@@ -459,10 +516,10 @@
     </main>
 
     <!-- Footer -->
-    <footer id="contact" class="py-20 md:py-32 px-6 md:px-12 bg-[#030303] border-t border-white/5 relative overflow-hidden">
+    <footer id="contact" class="py-20 md:py-32 px-6 md:px-12 bg-[#030303] border-t border-white/5 relative overflow-hidden text-white">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12 md:gap-20">
             <div class="max-w-3xl text-left">
-                <h2 class="text-4xl md:text-7xl font-sync font-bold mb-8 md:mb-12 uppercase tracking-tighter leading-none">Let's <br> <span class="text-blue-500">Create</span></h2>
+                <h2 class="text-4xl md:text-7xl font-sync font-bold mb-8 md:mb-12 uppercase tracking-tighter leading-none text-white">Let's <br> <span class="text-blue-500">Create</span></h2>
                 
                 <div class="flex flex-wrap gap-8 md:gap-12">
                     <a href="mailto:maindr408@gmail.com" class="group flex items-center gap-4">
@@ -568,13 +625,10 @@
                 page.classList.remove('active');
             });
             document.getElementById(pageId + '-page').classList.add('active');
-            
             const menu = document.getElementById('mobile-menu');
             menu.style.display = 'none';
             document.body.style.overflow = 'auto';
-
             window.scrollTo({top: 0, behavior: 'smooth'});
-            
             setTimeout(() => {
                 initYtThumbs();
                 reveal(); 
